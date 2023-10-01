@@ -12,7 +12,7 @@ import (
 
 	jwt "github.com/golang-jwt/jwt/v5"
 )
-
+// Possible to check the JWT token and verify on URL: https://jwt.io/
 func main() {
 	key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)
 
