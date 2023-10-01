@@ -18,10 +18,9 @@ func main() {
 
 	pvt, pub, err := pemKeyPair(key)
 
-        if err != nil {
+	if err != nil {
 		log.Fatal(err)
 	}
-
 
 	fmt.Println(string(pvt), "\n", string(pub))
 
@@ -36,8 +35,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-
+	fmt.Println(tokenString)
 	var ecdsaKey *ecdsa.PublicKey
 	if ecdsaKey, err = jwt.ParseECPublicKeyFromPEM(pub); err != nil {
 		fmt.Println("Unable to parse ECDSA public key: %v", err)
@@ -46,7 +44,6 @@ func main() {
 		return ecdsaKey, nil
 	})
 	fmt.Println(tkn.Valid)
-	
 
 }
 
@@ -57,7 +54,7 @@ func pemKeyPair(key *ecdsa.PrivateKey) (privKeyPEM []byte, pubKeyPEM []byte, err
 	}
 
 	privKeyPEM = pem.EncodeToMemory(&pem.Block{
-		Type:  "EC PRIVATE KEY",
+		Type:  "PRIVATE KEY",
 		Bytes: der,
 	})
 
@@ -67,10 +64,9 @@ func pemKeyPair(key *ecdsa.PrivateKey) (privKeyPEM []byte, pubKeyPEM []byte, err
 	}
 
 	pubKeyPEM = pem.EncodeToMemory(&pem.Block{
-		Type:  "EC PUBLIC KEY",
+		Type:  "PUBLIC KEY",
 		Bytes: der,
 	})
 
 	return
 }
-
